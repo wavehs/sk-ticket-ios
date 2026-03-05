@@ -1,0 +1,28 @@
+{
+  "short_name": "Ticketer",
+  "name": "Ticketer",
+  "icons": [
+    {
+      "src": "ticketer.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "ticketer.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#201f24",
+  "background_color": "#201f24"
+}

@@ -1,0 +1,99 @@
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 430px;
+    margin: 0 auto;
+    background-color: #000;
+    z-index: 10;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px 4px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.back-chevron {
+    color: #3478f6;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.back-badge {
+    background-color: #3478f6;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 12px;
+    min-width: 22px;
+    text-align: center;
+}
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0 0;
+}
+
+.avatar {
+    margin-bottom: 4px;
+}
+
+.avatar-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #636366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-icon {
+    width: 30px;
+    height: 30px;
+    color: #fff;
+}
+
+.contact-number {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.chevron-right {
+    color: #8e8e93;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.message-type {
+    color: #8e8e93;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 1px;
+}
+
+.message-date {
+    color: #8e8e93;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 0px;
+}
