@@ -18,8 +18,5 @@ export const Footer = () => (
         </svg>
       </button>
     </div>
-    <div className="home-indicator-area">
-      <div className="home-indicator"></div>
-    </div>
   </div>
 );

@@ -1,12 +1,13 @@
 .their-message-wrapper {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
 .their-message-bubble {
   background-color: #26252a;
   border-radius: 18px;
+  border-bottom-left-radius: 4px;
   padding: 10px 14px;
   max-width: 75%;
   display: flex;
@@ -15,16 +16,6 @@
   font-size: 16px;
   line-height: 1.35;
   position: relative;
-}
-
-.their-message-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: -8px;
-  width: 20px;
-  height: 20px;
-  background: radial-gradient(ellipse at top right, #26252a 50%, transparent 52%);
 }
 
 .msg-line {
