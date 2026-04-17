@@ -12,18 +12,18 @@ export const Header = () => (
           <span className="back-badge">{randomBadgeCount}</span>
         </div>
       </div>
-      <div className="nav-right"></div>
-    </div>
-    <div className="contact-section">
-      <div className="contact-avatar">
-        <svg viewBox="0 0 60 60" width="60" height="60">
-          <circle cx="30" cy="22" r="12" fill="#ffffff" />
-          <path d="M30 38 C 12 38 6 56 6 60 L 54 60 C 54 56 48 38 30 38 Z" fill="#ffffff" />
-        </svg>
-      </div>
-      <div className="contact-name-pill">
-        <span className="contact-name-text">1166</span>
-        <span className="contact-chevron">›</span>
+      
+      <div className="nav-center">
+        <div className="contact-avatar">
+          <svg viewBox="0 0 56 56" width="56" height="56">
+            <circle cx="28" cy="20" r="11" fill="#ffffff" />
+            <path d="M28 36 C 11 36 5 53 5 56 L 51 56 C 51 53 45 36 28 36 Z" fill="#ffffff" />
+          </svg>
+        </div>
+        <div className="contact-name-pill">
+          <span className="contact-name-text">1166</span>
+          <span className="contact-chevron">›</span>
+        </div>
       </div>
     </div>
   </div>

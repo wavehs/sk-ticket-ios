@@ -10,7 +10,7 @@ import { generateFakeTimes } from "./util/time";
 const { Component, Fragment } = React;
 
 const messagesWrapperStyle = {
-  marginTop: 130,
+  marginTop: "calc(env(safe-area-inset-top, 47px) + 65px)",
   marginBottom: 80,
   padding: "0 16px 15px",
   backgroundColor: "#000",
@@ -23,6 +23,10 @@ class App extends Component {
       fakeTimes: this.createFakeTimes(),
     };
     window.addEventListener("focus", this.refreshMessages);
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   componentWillUnmount() {
