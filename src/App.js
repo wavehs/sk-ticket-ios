@@ -1,16 +1,18 @@
 import * as React from "react";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
-import { MessageBlock } from "./components/message_block";
+import { MyMessage } from "./components/my_message";
+import { TheirMessage } from "./components/their_message";
+import { Divider } from "./components/divider";
 import { createMessageHash } from "./util/hash";
 import { generateFakeTimes } from "./util/time";
 
 const { Component, Fragment } = React;
 
 const messagesWrapperStyle = {
-  marginTop: 200,
+  marginTop: 130,
   marginBottom: 80,
-  padding: "0 10px 15px",
+  padding: "0 16px 15px",
   backgroundColor: "#000",
 };
 
@@ -20,7 +22,6 @@ class App extends Component {
     this.state = {
       fakeTimes: this.createFakeTimes(),
     };
-    this.touchTimeout = null;
     window.addEventListener("focus", this.refreshMessages);
   }
 
@@ -41,13 +42,51 @@ class App extends Component {
     }));
 
   render() {
+    const { fakeTimes } = this.state;
+    // Group messages by offsetDays
+    const groupedMessages = fakeTimes.reduce((acc, curr) => {
+      if (!acc[curr.offsetDays]) acc[curr.offsetDays] = [];
+      acc[curr.offsetDays].push(curr);
+      return acc;
+    }, {});
+
+    // Sort the keys numerically descending so that largest offset comes first
+    const sortedOffsets = Object.keys(groupedMessages)
+      .map(Number)
+      .sort((a, b) => b - a);
+
     return (
       <Fragment>
         <Header />
         <div style={messagesWrapperStyle}>
-          {this.state.fakeTimes.map((fakeTime) => (
-            <MessageBlock {...fakeTime} key={fakeTime.messageHash} />
-          ))}
+          {sortedOffsets.map((offset, index) => {
+            const messages = groupedMessages[offset];
+            const isToday = offset === 0;
+            return (
+              <Fragment key={offset}>
+                <Divider date={messages[0].divisorDate} isFirst={index === 0} />
+                <div style={{ paddingBottom: "10px" }}>
+                  {messages.map((msg, index) => (
+                    <Fragment key={msg.messageHash}>
+                      <div style={{ marginBottom: "8px" }}>
+                        <MyMessage />
+                      </div>
+                      <div style={{ marginBottom: index !== messages.length - 1 ? "24px" : "0px" }}>
+                        <TheirMessage
+                          date={msg.date}
+                          endTime={msg.endTime}
+                          messageHash={msg.messageHash}
+                          startTime={msg.startTime}
+                          isLast={true}
+                          isFirst={true}
+                        />
+                      </div>
+                    </Fragment>
+                  ))}
+                </div>
+              </Fragment>
+            );
+          })}
         </div>
         <Footer />
       </Fragment>

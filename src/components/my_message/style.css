@@ -1,18 +1,50 @@
 .my-message-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  padding-right: 6px;
 }
 
 .my-message-bubble {
-  background-color: #30d158;
-  color: #fff;
-  border-radius: 18px;
-  border-bottom-right-radius: 4px;
-  padding: 8px 14px;
   position: relative;
-  font-size: 16px;
-  line-height: 1.35;
-  min-width: 20px;
-  min-height: 16px;
+  background-color: #32d74b;
+  border-radius: 18px;
+  width: 48px;
+  height: 36px;
+}
+
+.my-message-bubble:not(.is-first) {
+  border-top-right-radius: 6px;
+}
+
+.my-message-bubble:not(.is-last) {
+  border-bottom-right-radius: 6px;
+}
+
+.my-message-bubble.is-last {
+  border-bottom-right-radius: 4px;
+}
+
+.my-message-bubble.is-last::before {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  background: #32d74b;
+  border-bottom-left-radius: 16px 14px;
+  z-index: 0;
+}
+
+.my-message-bubble.is-last::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  bottom: -1px;
+  width: 12px;
+  height: 20px;
+  background: #000000;
+  border-bottom-left-radius: 12px 10px;
+  z-index: 1;
 }
