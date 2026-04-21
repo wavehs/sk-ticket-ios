@@ -6,8 +6,20 @@ import { TheirMessage } from "./components/their_message";
 import { Divider } from "./components/divider";
 import { createMessageHash } from "./util/hash";
 import { generateFakeTimes } from "./util/time";
+import FakeOverlay from "./components/FakeOverlay";
+import { useSubscription } from "./util/subscription";
 
 const { Component, Fragment } = React;
+
+function AppWrapper() {
+  const { isValid, loading, expirationDate, saveKey, checkSubscription } = useSubscription();
+
+  if (loading) {
+    return <div style={{backgroundColor: '#000', height: '100vh'}} />
+  }
+
+  return <App subscription={{ isValid, expirationDate, saveKey, checkSubscription }} />;
+}
 
 const messagesWrapperStyle = {
   marginTop: "calc(env(safe-area-inset-top, 47px) + 65px)",
@@ -47,6 +59,8 @@ class App extends Component {
 
   render() {
     const { fakeTimes } = this.state;
+    const { subscription } = this.props;
+    const { isValid } = subscription;
     // Group messages by offsetDays
     const groupedMessages = fakeTimes.reduce((acc, curr) => {
       if (!acc[curr.offsetDays]) acc[curr.offsetDays] = [];
@@ -61,7 +75,8 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Header />
+        {!isValid && <FakeOverlay />}
+        <Header subscription={subscription} />
         <div style={messagesWrapperStyle}>
           {sortedOffsets.map((offset, index) => {
             const messages = groupedMessages[offset];
@@ -98,4 +113,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppWrapper;
