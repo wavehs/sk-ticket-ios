@@ -12,13 +12,13 @@ import { useSubscription } from "./util/subscription";
 const { Component, Fragment } = React;
 
 function AppWrapper() {
-  const { isValid, loading, expirationDate, saveKey, checkSubscription } = useSubscription();
+  const { isValid, loading, expirationDate, saveKey, checkSubscription, deviceId } = useSubscription();
 
   if (loading) {
     return <div style={{backgroundColor: '#000', height: '100vh'}} />
   }
 
-  return <App subscription={{ isValid, expirationDate, saveKey, checkSubscription }} />;
+  return <App subscription={{ isValid, expirationDate, saveKey, checkSubscription, deviceId }} />;
 }
 
 const messagesWrapperStyle = {
