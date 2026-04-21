@@ -19,3 +19,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+keygen/node_modules/
+keygen/node_modules/
+private_key.pem
+keygen/public_key.json
