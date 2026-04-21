@@ -13,6 +13,19 @@ export const AdminPanel = () => {
     const [generatedKey, setGeneratedKey] = useState('');
     const [error, setError] = useState('');
     const [copied, setCopied] = useState(false);
+    const [customDays, setCustomDays] = useState('');
+
+    const handlePasteDevice = () => {
+        navigator.clipboard.readText().then((text) => {
+            setDeviceId(text.trim());
+        });
+    };
+
+    const handlePastePrivateKey = () => {
+        navigator.clipboard.readText().then((text) => {
+            setPrivateKeyPem(text);
+        });
+    };
 
     useEffect(() => {
         const stored = localStorage.getItem(STORAGE_KEY);
@@ -102,6 +115,12 @@ export const AdminPanel = () => {
                             placeholder="-----BEGIN PRIVATE KEY-----&#10;...&#10;-----END PRIVATE KEY-----"
                             rows={6}
                         />
+                        <button className="btn-paste" onClick={handlePastePrivateKey} style={{
+                            width: '100%', padding: '10px', marginTop: '8px',
+                            border: '1px solid #444', borderRadius: '8px',
+                            backgroundColor: '#2a2a2a', color: '#ccc', fontSize: '14px',
+                            cursor: 'pointer'
+                        }}>📋 Вставить из буфера</button>
                     </div>
                     {error && <div className="admin-error">{error}</div>}
                     <button className="btn-generate" onClick={handleSavePrivateKey}>
@@ -124,14 +143,21 @@ export const AdminPanel = () => {
 
                 <div className="field">
                     <label>Код устройства клиента:</label>
-                    <input
-                        type="text"
-                        value={deviceId}
-                        onChange={(e) => setDeviceId(e.target.value)}
-                        placeholder="A7B9-X2K1"
-                        maxLength={9}
-                        style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '18px', textAlign: 'center' }}
-                    />
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                        <input
+                            type="text"
+                            value={deviceId}
+                            onChange={(e) => setDeviceId(e.target.value)}
+                            placeholder="A7B9-X2K1"
+                            maxLength={9}
+                            style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '18px', textAlign: 'center', flex: 1 }}
+                        />
+                        <button onClick={handlePasteDevice} style={{
+                            border: '1px solid #444', borderRadius: '8px',
+                            backgroundColor: '#2a2a2a', color: '#ccc', fontSize: '18px',
+                            cursor: 'pointer', padding: '0 14px', whiteSpace: 'nowrap'
+                        }}>📋</button>
+                    </div>
                 </div>
 
                 <div className="field">
@@ -140,13 +166,21 @@ export const AdminPanel = () => {
                         {DAY_PRESETS.map(d => (
                             <button
                                 key={d}
-                                className={days === d ? 'active' : ''}
-                                onClick={() => setDays(d)}
+                                className={days === d && customDays === '' ? 'active' : ''}
+                                onClick={() => { setDays(d); setCustomDays(''); }}
                             >
                                 {d}
                             </button>
                         ))}
                     </div>
+                    <input
+                        type="number"
+                        value={customDays}
+                        onChange={(e) => { setCustomDays(e.target.value); if (e.target.value) setDays(Number(e.target.value)); }}
+                        placeholder="Или введите своё количество"
+                        min={1}
+                        style={{ marginTop: '8px' }}
+                    />
                 </div>
 
                 {error && <div className="admin-error">{error}</div>}

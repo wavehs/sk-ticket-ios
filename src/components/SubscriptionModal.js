@@ -15,6 +15,12 @@ export const SubscriptionModal = ({ onClose, subscription }) => {
         });
     };
 
+    const handlePaste = () => {
+        navigator.clipboard.readText().then((text) => {
+            setKeyInput(text);
+        });
+    };
+
     const handleSave = async () => {
         setError('');
         setSuccess('');
@@ -70,6 +76,12 @@ export const SubscriptionModal = ({ onClose, subscription }) => {
                         placeholder="Paste your key here..."
                         rows={4}
                     />
+                    <button onClick={handlePaste} style={{
+                        width: '100%', padding: '10px', marginTop: '8px',
+                        border: '1px solid #555', borderRadius: '6px',
+                        backgroundColor: '#333', color: '#fff', fontSize: '14px',
+                        cursor: 'pointer'
+                    }}>📋 Вставить из буфера</button>
                 </div>
 
                 {error && <div className="error-msg">{error}</div>}
