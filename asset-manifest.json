@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/sk-ticket-ios/static/css/main.75248d22.css",
-    "main.js": "/sk-ticket-ios/static/js/main.66438c17.js",
+    "main.css": "/sk-ticket-ios/static/css/main.0ef2c84c.css",
+    "main.js": "/sk-ticket-ios/static/js/main.fd41e334.js",
     "index.html": "/sk-ticket-ios/index.html",
-    "main.75248d22.css.map": "/sk-ticket-ios/static/css/main.75248d22.css.map",
-    "main.66438c17.js.map": "/sk-ticket-ios/static/js/main.66438c17.js.map"
+    "main.0ef2c84c.css.map": "/sk-ticket-ios/static/css/main.0ef2c84c.css.map",
+    "main.fd41e334.js.map": "/sk-ticket-ios/static/js/main.fd41e334.js.map"
   },
   "entrypoints": [
-    "static/css/main.75248d22.css",
-    "static/js/main.66438c17.js"
+    "static/css/main.0ef2c84c.css",
+    "static/js/main.fd41e334.js"
   ]
 }
