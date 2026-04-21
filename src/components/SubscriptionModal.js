@@ -6,6 +6,14 @@ export const SubscriptionModal = ({ onClose, subscription }) => {
     const [keyInput, setKeyInput] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(deviceId).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        });
+    };
 
     const handleSave = async () => {
         setError('');
@@ -44,7 +52,14 @@ export const SubscriptionModal = ({ onClose, subscription }) => {
 
                 <div className="device-info" style={{ marginBottom: '20px', textAlign: 'center', backgroundColor: '#333', padding: '10px', borderRadius: '8px' }}>
                     <p style={{ margin: '0 0 5px 0', fontSize: '14px', color: '#ccc' }}>Your Device Code:</p>
-                    <p style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px', color: '#fff' }}>{deviceId}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                        <p style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px', color: '#fff' }}>{deviceId}</p>
+                        <button onClick={handleCopy} style={{
+                            background: 'none', border: '1px solid #666', borderRadius: '6px',
+                            color: copied ? '#51cf66' : '#ccc', cursor: 'pointer', padding: '4px 8px',
+                            fontSize: '14px', transition: 'color 0.2s'
+                        }}>{copied ? '✓' : '⧉'}</button>
+                    </div>
                 </div>
 
                 <div className="input-group">

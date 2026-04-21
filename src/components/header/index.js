@@ -11,7 +11,7 @@ export const Header = ({ subscription }) => {
   const startPress = () => {
     pressTimer.current = setTimeout(() => {
       setShowModal(true);
-    }, 3000);
+    }, 1500);
   };
 
   const cancelPress = () => {
