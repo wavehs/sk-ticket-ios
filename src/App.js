@@ -8,10 +8,11 @@ import { createMessageHash } from "./util/hash";
 import { generateFakeTimes } from "./util/time";
 import FakeOverlay from "./components/FakeOverlay";
 import { useSubscription } from "./util/subscription";
+import { AdminPanel } from "./components/AdminPanel";
 
 const { Component, Fragment } = React;
 
-function AppWrapper() {
+function MainApp() {
   const { isValid, loading, expirationDate, saveKey, checkSubscription, deviceId } = useSubscription();
 
   if (loading) {
@@ -19,6 +20,22 @@ function AppWrapper() {
   }
 
   return <App subscription={{ isValid, expirationDate, saveKey, checkSubscription, deviceId }} />;
+}
+
+function AppWrapper() {
+  const [hash, setHash] = React.useState(window.location.hash);
+
+  React.useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
+
+  if (hash === '#admin') {
+    return <AdminPanel />;
+  }
+
+  return <MainApp />;
 }
 
 const messagesWrapperStyle = {
