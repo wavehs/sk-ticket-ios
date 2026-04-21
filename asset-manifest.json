@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sk-ticket-ios/static/css/main.75248d22.css",
+    "main.js": "/sk-ticket-ios/static/js/main.45b71de2.js",
+    "index.html": "/sk-ticket-ios/index.html",
+    "main.75248d22.css.map": "/sk-ticket-ios/static/css/main.75248d22.css.map",
+    "main.45b71de2.js.map": "/sk-ticket-ios/static/js/main.45b71de2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75248d22.css",
+    "static/js/main.45b71de2.js"
+  ]
+}
