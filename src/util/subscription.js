@@ -2,10 +2,24 @@ import { useState, useEffect } from 'react';
 import * as jose from 'jose';
 import publicKeyJwk from './publicKey.json';
 
+function getOrCreateDeviceId() {
+  let deviceId = localStorage.getItem('device_id');
+  if (!deviceId) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    deviceId = '';
+    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    deviceId += '-';
+    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    localStorage.setItem('device_id', deviceId);
+  }
+  return deviceId;
+}
+
 export function useSubscription() {
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(true);
   const [expirationDate, setExpirationDate] = useState(null);
+  const [deviceId] = useState(getOrCreateDeviceId());
 
   const checkSubscription = async () => {
     setLoading(true);
@@ -27,6 +41,10 @@ export function useSubscription() {
         issuer: 'sk-ticket-keygen',
       });
 
+      if (payload.device_id !== deviceId) {
+        throw new Error('Token bound to another device');
+      }
+
       // Verification successful, also inherently checks the exp claim
       setIsValid(true);
       setExpirationDate(new Date(payload.exp * 1000));
@@ -43,9 +61,14 @@ export function useSubscription() {
   const saveKey = async (token) => {
       try {
         const publicKey = await jose.importJWK(publicKeyJwk, 'ES256');
-        await jose.jwtVerify(token, publicKey, {
+        const { payload } = await jose.jwtVerify(token, publicKey, {
             issuer: 'sk-ticket-keygen',
         });
+        
+        if (payload.device_id !== deviceId) {
+            throw new Error('Token bound to another device');
+        }
+
         // If it passes verification, save it
         localStorage.setItem('subscription_key', token);
         await checkSubscription();
@@ -59,5 +82,5 @@ export function useSubscription() {
     checkSubscription();
   }, []);
 
-  return { isValid, loading, expirationDate, saveKey, checkSubscription };
+  return { isValid, loading, expirationDate, saveKey, checkSubscription, deviceId };
 }

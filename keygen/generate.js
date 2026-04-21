@@ -11,6 +11,12 @@ const argv = yargs(hideBin(process.argv))
     type: 'number',
     demandOption: true,
   })
+  .option('device', {
+    alias: 'dev',
+    description: 'Device ID to bind the key to (e.g., A7B9-X2K1)',
+    type: 'string',
+    demandOption: true,
+  })
   .help()
   .alias('help', 'h')
   .argv;
@@ -58,7 +64,7 @@ async function generateKey() {
 
   // Generate JWT
   const exp = Math.floor(Date.now() / 1000) + (days * 24 * 60 * 60);
-  const jwt = await new jose.SignJWT({ 'urn:sk-ticket:subscription': true })
+  const jwt = await new jose.SignJWT({ 'urn:sk-ticket:subscription': true, device_id: argv.device })
     .setProtectedHeader({ alg: 'ES256' })
     .setIssuedAt()
     .setIssuer('sk-ticket-keygen')
