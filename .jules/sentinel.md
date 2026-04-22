@@ -1,0 +1,4 @@
+## 2025-04-22 - Predictable Device ID Generation
+**Vulnerability:** Predictable device IDs used for JWT authentication generated using `Math.random()`.
+**Learning:** `Math.random()` provides no cryptographic security and makes generated IDs highly predictable. Since the application uses these device IDs as a binding factor for client-side subscription validity (to prevent sharing keys), predictable IDs render this defense mechanism useless. Wait, using `Math.random()` doesn't "break" it entirely, but if someone figures out the sequence, they can generate valid keys. But it's poor security practice. The core issue is that `Math.random()` should never be used for security-critical functions like ID generation or secret generation.
+**Prevention:** Always use `crypto.getRandomValues()` (or equivalent Node `crypto` modules) to generate random values for security purposes like keys, tokens, or unique identifiers.
