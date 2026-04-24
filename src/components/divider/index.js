@@ -9,13 +9,13 @@ const dividerContainerStyle = {
 };
 
 const messageTypeStyle = {
-  color: "#8e8e93",
+  color: "var(--divider-text)",
   fontSize: "11px",
   fontWeight: "500",
 };
 
 const dateStyle = {
-  color: "#8e8e93",
+  color: "var(--divider-text)",
   fontSize: "11px",
   fontWeight: "500",
 };

@@ -16,7 +16,7 @@ function MainApp() {
   const { isValid, loading, expirationDate, saveKey, checkSubscription, deviceId } = useSubscription();
 
   if (loading) {
-    return <div style={{backgroundColor: '#000', height: '100vh'}} />
+    return <div style={{backgroundColor: 'var(--bg-color)', height: '100vh'}} />
   }
 
   return <App subscription={{ isValid, expirationDate, saveKey, checkSubscription, deviceId }} />;
@@ -42,7 +42,7 @@ const messagesWrapperStyle = {
   marginTop: "calc(env(safe-area-inset-top, 47px) + 65px)",
   marginBottom: 80,
   padding: "0 16px 15px",
-  backgroundColor: "#000",
+  backgroundColor: "var(--bg-color)",
 };
 
 class App extends Component {

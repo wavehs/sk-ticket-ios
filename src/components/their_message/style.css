@@ -7,8 +7,8 @@
 
 .their-message-bubble {
   position: relative;
-  background-color: #262629;
-  color: #ffffff;
+  background-color: var(--message-bg-their);
+  color: var(--message-text-their);
   border-radius: 18px;
   padding: 10px 14px;
   max-width: 75%;
@@ -37,7 +37,7 @@
   bottom: 0;
   width: 18px;
   height: 18px;
-  background: #262629;
+  background: var(--message-bg-their);
   border-bottom-right-radius: 16px 14px;
   z-index: 0;
 }
@@ -49,7 +49,7 @@
   bottom: -1px;
   width: 12px;
   height: 20px;
-  background: #000000;
+  background: var(--bg-color);
   border-bottom-right-radius: 12px 10px;
   z-index: 1;
 }
@@ -61,6 +61,6 @@
 }
 
 .msg-underline {
-  color: #ffffff;
+  color: var(--message-text-their);
   text-decoration: underline;
 }

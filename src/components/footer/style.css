@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #000;
+  background-color: var(--footer-bg);
   z-index: 100;
   padding: 10px 10px 28px 10px;
 }
@@ -19,8 +19,8 @@
   height: 38px;
   min-width: 38px;
   border-radius: 50%;
-  background-color: #101012;
-  border: 1px solid #1f1f22;
+  background-color: var(--footer-inner-bg);
+  border: 1px solid var(--footer-border);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,8 +33,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #101012;
-  border: 1px solid #1f1f22;
+  background-color: var(--footer-inner-bg);
+  border: 1px solid var(--footer-border);
   border-radius: 20px;
   padding: 8px 12px 8px 16px;
   min-height: 38px;
@@ -42,7 +42,7 @@
 
 .footer-input-text {
   font-size: 16px;
-  color: #636366;
+  color: var(--footer-text);
   line-height: 1.2;
   white-space: nowrap;
 }

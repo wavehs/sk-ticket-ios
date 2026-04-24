@@ -7,7 +7,7 @@
 
 .my-message-bubble {
   position: relative;
-  background-color: #32d74b;
+  background-color: var(--message-bg-my);
   border-radius: 18px;
   width: 48px;
   height: 36px;
@@ -32,7 +32,7 @@
   bottom: 0;
   width: 18px;
   height: 18px;
-  background: #32d74b;
+  background: var(--message-bg-my);
   border-bottom-left-radius: 16px 14px;
   z-index: 0;
 }
@@ -44,7 +44,7 @@
   bottom: -1px;
   width: 12px;
   height: 20px;
-  background: #000000;
+  background: var(--bg-color);
   border-bottom-left-radius: 12px 10px;
   z-index: 1;
 }

@@ -27,8 +27,8 @@
 }
 
 .fake-overlay-card {
-    background: rgba(30, 30, 30, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--modal-bg);
+    border: 1px solid var(--modal-input-border);
     border-radius: 16px;
     padding: 32px 40px;
     text-align: center;
@@ -40,18 +40,18 @@
 .fake-overlay-title {
     font-size: 20px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--modal-text);
     letter-spacing: 1px;
     margin-bottom: 16px;
 }
 
 .fake-overlay-contact {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--divider-text);
 }
 
 .fake-overlay-label {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--divider-text);
 }
 
 .fake-overlay-link {
