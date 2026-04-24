@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './SubscriptionModal.css';
+import { useTheme } from '../util/theme';
 
 export const SubscriptionModal = ({ onClose, subscription }) => {
     const { isValid, expirationDate, saveKey, deviceId } = subscription;
+    const { theme, toggleTheme } = useTheme();
     const [keyInput, setKeyInput] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -56,13 +58,21 @@ export const SubscriptionModal = ({ onClose, subscription }) => {
                     </div>
                 )}
 
-                <div className="device-info" style={{ marginBottom: '20px', textAlign: 'center', backgroundColor: '#333', padding: '10px', borderRadius: '8px' }}>
-                    <p style={{ margin: '0 0 5px 0', fontSize: '14px', color: '#ccc' }}>Your Device Code:</p>
+                <div className="theme-switch-wrapper">
+                    <span className="theme-switch-label">White Theme</span>
+                    <label className="ios-switch">
+                        <input type="checkbox" checked={theme === 'light'} onChange={toggleTheme} />
+                        <span className="ios-slider"></span>
+                    </label>
+                </div>
+
+                <div className="device-info" style={{ marginBottom: '20px', textAlign: 'center', backgroundColor: 'var(--modal-input-bg)', padding: '10px', borderRadius: '8px' }}>
+                    <p style={{ margin: '0 0 5px 0', fontSize: '14px', color: 'var(--divider-text)' }}>Your Device Code:</p>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
-                        <p style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px', color: '#fff' }}>{deviceId}</p>
+                        <p style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', letterSpacing: '2px', color: 'var(--modal-text)' }}>{deviceId}</p>
                         <button onClick={handleCopy} style={{
-                            background: 'none', border: '1px solid #666', borderRadius: '6px',
-                            color: copied ? '#51cf66' : '#ccc', cursor: 'pointer', padding: '4px 8px',
+                            background: 'none', border: '1px solid var(--modal-input-border)', borderRadius: '6px',
+                            color: copied ? '#51cf66' : 'var(--divider-text)', cursor: 'pointer', padding: '4px 8px',
                             fontSize: '14px', transition: 'color 0.2s'
                         }}>{copied ? '✓' : '⧉'}</button>
                     </div>
