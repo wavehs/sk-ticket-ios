@@ -7,9 +7,11 @@ function getOrCreateDeviceId() {
   if (!deviceId) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     deviceId = '';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    const randomValues = new Uint32Array(8);
+    window.crypto.getRandomValues(randomValues);
+    for(let i=0; i<4; i++) deviceId += chars.charAt(randomValues[i] % chars.length);
     deviceId += '-';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    for(let i=0; i<4; i++) deviceId += chars.charAt(randomValues[i+4] % chars.length);
     localStorage.setItem('device_id', deviceId);
   }
   return deviceId;
@@ -39,6 +41,7 @@ export function useSubscription() {
       // Verify JWT
       const { payload } = await jose.jwtVerify(token, publicKey, {
         issuer: 'sk-ticket-keygen',
+        algorithms: ['ES256'],
       });
 
       if (payload.device_id !== deviceId) {
@@ -63,6 +66,7 @@ export function useSubscription() {
         const publicKey = await jose.importJWK(publicKeyJwk, 'ES256');
         const { payload } = await jose.jwtVerify(token, publicKey, {
             issuer: 'sk-ticket-keygen',
+            algorithms: ['ES256'],
         });
         
         if (payload.device_id !== deviceId) {
