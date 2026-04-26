@@ -1,0 +1,4 @@
+## 2024-04-26 - [Remove Private Key from localStorage]
+**Vulnerability:** The Admin Panel allowed users to paste and then automatically stored the ECDSA private key (`admin_private_key`) in plaintext within the browser's `localStorage`.
+**Learning:** `localStorage` is accessible by any script running on the same domain (including malicious XSS payloads) and persists indefinitely. This makes it a highly insecure location for sensitive cryptographic material like a private key. The security model assumed "Ключ сохранится только в памяти этого браузера. Никуда не отправляется" was sufficient, but failed to account for the persistence and shared access of `localStorage`.
+**Prevention:** Sensitive material, especially private keys, should ideally never touch the frontend. If they must for a standalone client-side tool, keep them strictly in-memory (e.g., React component state) and force the user to re-provide them each session to limit exposure time.

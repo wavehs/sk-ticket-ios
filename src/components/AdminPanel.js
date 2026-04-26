@@ -28,11 +28,8 @@ export const AdminPanel = () => {
     };
 
     useEffect(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            setPrivateKeyPem(stored);
-            setIsKeyStored(true);
-        }
+        // Clean up legacy keys that may be stored
+        localStorage.removeItem(STORAGE_KEY);
     }, []);
 
     const handleSavePrivateKey = async () => {
@@ -45,7 +42,7 @@ export const AdminPanel = () => {
         try {
             // Validate the key by trying to import it
             await jose.importPKCS8(trimmed, 'ES256');
-            localStorage.setItem(STORAGE_KEY, trimmed);
+            // We store it only in memory (state) now, not localStorage.
             setIsKeyStored(true);
         } catch (e) {
             setError('Не удалось прочитать ключ: ' + e.message);
@@ -95,7 +92,6 @@ export const AdminPanel = () => {
     };
 
     const handleForgetKey = () => {
-        localStorage.removeItem(STORAGE_KEY);
         setPrivateKeyPem('');
         setIsKeyStored(false);
         setGeneratedKey('');
