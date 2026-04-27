@@ -1,0 +1,4 @@
+## 2026-04-27 - [Fix weak random number generation for device IDs]
+**Vulnerability:** The application used `Math.random()` to generate the `device_id` which is used to uniquely identify devices for subscription licensing. `Math.random()` is not cryptographically secure, and its outputs can be predicted.
+**Learning:** For any IDs that are critical to security/licensing or authentication mechanisms, cryptographically secure random number generators must be used.
+**Prevention:** Always use `window.crypto.getRandomValues()` or similar secure APIs instead of `Math.random()` for generating sensitive or unique IDs, tokens, or keys.
