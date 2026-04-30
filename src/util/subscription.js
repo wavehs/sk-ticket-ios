@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import * as jose from 'jose';
 import publicKeyJwk from './publicKey.json';
 
-function getOrCreateDeviceId() {
+export function getOrCreateDeviceId() {
   let deviceId = localStorage.getItem('device_id');
   if (!deviceId) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     deviceId = '';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    const randomValues = new Uint32Array(8);
+    self.crypto.getRandomValues(randomValues);
+    for(let i=0; i<4; i++) deviceId += chars.charAt(randomValues[i] % chars.length);
     deviceId += '-';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    for(let i=0; i<4; i++) deviceId += chars.charAt(randomValues[i+4] % chars.length);
     localStorage.setItem('device_id', deviceId);
   }
   return deviceId;
