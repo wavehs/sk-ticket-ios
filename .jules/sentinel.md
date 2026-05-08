@@ -1,0 +1,4 @@
+## 2025-05-08 - Weak random number generation
+**Vulnerability:** The application used `Math.random()` to generate the `device_id` string, which acts as a security binding mechanism for the subscription JWTs. `Math.random()` is not cryptographically secure, allowing potential attackers to predict `device_id` values.
+**Learning:** `Math.random()` should never be used for generating strings intended for authentication, tokens, session IDs, or cryptographic bindings, as the underlying PRNG algorithm is predictable.
+**Prevention:** Always use `self.crypto.getRandomValues()` (in browsers) or `crypto.randomBytes()` (in Node.js) for security-sensitive random number generation. When running tests in `jsdom` with `self.crypto.getRandomValues()`, use `crypto.randomFillSync()` to polyfill the environment.
