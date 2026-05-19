@@ -1,0 +1,4 @@
+## 2024-05-19 - [MEDIUM] Fix weak random number generation for device identifiers
+**Vulnerability:** The client-side subscription verification system generated its `device_id` (a critical component binding a JWT subscription token to a specific client) using `Math.random()`, which is a weak PRNG.
+**Learning:** `Math.random()` values are predictable and unsuitable for security-sensitive identifiers. A predictable identifier could allow an attacker to spoof another user's device.
+**Prevention:** Always use a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG), such as `globalThis.crypto.getRandomValues()`, for generating security-sensitive values like authentication tokens, device IDs, or cryptographic keys. When running tests in JSDOM, polyfill the browser's crypto object using Node's `crypto.randomFillSync`.
