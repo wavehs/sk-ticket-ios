@@ -1,0 +1,4 @@
+## 2024-05-18 - [Fix Weak Device ID Generation]
+**Vulnerability:** The application used `Math.random()` to generate a `device_id` string that served as a security identifier. `Math.random()` is not cryptographically secure, meaning its outputs can be predictable.
+**Learning:** `Math.random()` should never be used for security-sensitive operations such as generating unique IDs, tokens, or cryptographic keys, as it uses a weak pseudo-random number generator.
+**Prevention:** Use a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG), such as `globalThis.crypto.getRandomValues()`, to generate unpredictable values for security-related purposes.
