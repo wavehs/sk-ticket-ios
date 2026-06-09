@@ -1,0 +1,4 @@
+## 2024-06-09 - Secure Random Number Generation Pattern
+**Vulnerability:** Weak random number generation for security purposes (using `Math.random()` to generate device IDs in `src/util/subscription.js`).
+**Learning:** `Math.random()` is not cryptographically secure and predictable, which could allow attackers to guess device IDs. It needs to be replaced with CSPRNG like `crypto.getRandomValues()`. Additionally, JSDOM environments during tests (`CI=true npm test`) often lack a full implementation of `globalThis.crypto`, requiring a conditional polyfill in `src/setupTests.js` to ensure the test suite still functions correctly.
+**Prevention:** Always use `crypto.getRandomValues()` or a reliable CSPRNG package for generating security-sensitive IDs, tokens, or hashes, and provide appropriate fallback/mock for the test environment.
