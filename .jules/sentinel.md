@@ -1,0 +1,4 @@
+## 2024-06-12 - [MEDIUM] Fix weak random number generation for device ID
+**Vulnerability:** The function `getOrCreateDeviceId` in `src/util/subscription.js` used the non-cryptographically secure `Math.random()` to generate an 8-character device ID. This ID is used as part of the JWT validation in `useSubscription`, linking a generated token to a specific client device.
+**Learning:** Using `Math.random()` for security-related identifiers (like tying a device to a subscription token) reduces the entropy of the identifier, making it more predictable. It's a common mistake in front-end development where developer uses `Math.random()` out of convenience.
+**Prevention:** Always use a Cryptographically Secure Pseudo-Random Number Generator (CSPRNG) such as `crypto.getRandomValues()` or `globalThis.crypto.getRandomValues()` when generating tokens, passwords, session IDs, or any identifiers tied to security checks.
