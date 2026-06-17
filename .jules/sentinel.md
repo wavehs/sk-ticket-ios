@@ -1,0 +1,4 @@
+## 2024-06-17 - Weak random number generation for device ID
+**Vulnerability:** The application used `Math.random()` to generate a `deviceId` which acts as a unique identifier bound to subscription JWTs. `Math.random()` is not cryptographically secure and could potentially allow predictability.
+**Learning:** In frontend applications, standard `Math.random()` should be avoided for generating identifiers tied to security or subscriptions.
+**Prevention:** Always use `globalThis.crypto.getRandomValues()` (or equivalent CSPRNGs) for secure random number generation. When running tests in Node.js environments (like Jest without jsdom full support), conditionally polyfill `globalThis.crypto` using `require('crypto').webcrypto`.
