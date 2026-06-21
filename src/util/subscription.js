@@ -7,9 +7,15 @@ function getOrCreateDeviceId() {
   if (!deviceId) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     deviceId = '';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    const array = new Uint8Array(8);
+    globalThis.crypto.getRandomValues(array);
+    for (let i = 0; i < 4; i++) {
+      deviceId += chars[array[i] % chars.length];
+    }
     deviceId += '-';
-    for(let i=0; i<4; i++) deviceId += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (let i = 4; i < 8; i++) {
+      deviceId += chars[array[i] % chars.length];
+    }
     localStorage.setItem('device_id', deviceId);
   }
   return deviceId;
