@@ -1,0 +1,4 @@
+## 2024-11-20 - Weak Random Number Generation for Security Identifiers
+**Vulnerability:** The application used `Math.random()` to generate the `device_id` in `src/util/subscription.js`. This device identifier is used as a security-critical boundary to bind subscription JWTs to a specific device. Because `Math.random()` is not a cryptographically secure pseudo-random number generator (CSPRNG), an attacker could theoretically predict device identifiers.
+**Learning:** `Math.random()` should never be used for any data that requires security or unguessability (like session tokens, passwords, keys, or device identifiers used for authorization/binding).
+**Prevention:** Always use `globalThis.crypto.getRandomValues()` (in modern web environments) or `crypto.randomBytes()` (in Node.js) when generating any security-related random values.
